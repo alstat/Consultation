@@ -183,6 +183,8 @@ hpp <- function(data, lam = 0.3, phi = 0.2, bet1 = 0.1, delta = 0.6,
               "Highest Posterior Probability" = max(PP.prop),
               "The point v" = max.v))
 }
+
+hpp(data = airquality$Wind)
 ```
 Misleads in this Function
 ===============
