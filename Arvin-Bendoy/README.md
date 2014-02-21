@@ -269,3 +269,119 @@ $`Location of v`
 [1] 103
 ```
 So we have a good estimate, and base on the plot, it is in 102 where the big change occur.
+
+### HPP R = 50 runs
+
+```{coffee}
+hpp.runs <- function(dat, mu = 0, s = sqrt(1), t = 20, phi = 0.2, lam = 0.3, 
+                     bet1 = 0.3, delta = 0.5, a = 2, b = 2, R = 50, 
+                     bet.pr = matrix(c(0.1, 0.4, 0.1, 0.5), nrow = 4, ncol = 1),
+                     bet1.pr = matrix(c(0.2, 0.3), nrow = 2)){
+  hpp.out <- matrix(NA, nrow = R, ncol = 2)
+  colnames(hpp.out) <- c('HPP at v', 'HPP near v')
+  
+  # Loop the process R times
+  for(i in 1:R){
+    # Generate the data
+    d <- stchange.df(dat, mu = mu, s = s, t = t, phi = phi, 
+                     lam = lam, bet1 = bet1, delta = delta)
+    
+    # Compute the HPP
+    h <- hpp(d, Xcov = dat, a = a, b = b, lam = lam,
+             bet.pr = bet.pr, bet1.pr = bet1.pr)
+    
+    # Extract the location of v
+    h.out <- h$'Location of v'
+    
+    # Compute the HPP - 5% of R runs
+    h.nvl <- t - (0.05 * R)
+    
+    # Compute the HPP + 5% of R runs
+    h.nvu <- t + (0.05 * R)
+    
+    # Obtain the HPP at v
+    if(h.out == t){
+      hpp.out[i, 1] <- 1
+    }
+    
+    # Obtain the HPP near v
+    if((h.out > h.nvl) && (h.out < h.nvu)){
+      hpp.out[i, 2] <- 1
+    }
+  }
+  
+  # Return the output
+  return(list('HPP at v' = sum(hpp.out[,1], na.rm = TRUE),
+              'HPP near v' = sum(hpp.out[,2], na.rm = TRUE),
+              'Percentage near v' = sum(hpp.out[,2], na.rm = TRUE)/R,
+              'HPP Runs' = hpp.out))
+}
+```
+Let's give it a try,
+```{coffee}
+hpp.runs(dat = airquality$Wind[1:20], lam = 0.3, t = 8, R = 50)
+
+# OUTPUT
+$`HPP at v`
+[1] 0
+
+$`HPP near v`
+[1] 50
+
+$`Percentage near v`
+[1] 1
+
+$`HPP Runs`
+      HPP at v HPP near v
+ [1,]       NA          1
+ [2,]       NA          1
+ [3,]       NA          1
+ [4,]       NA          1
+ [5,]       NA          1
+ [6,]       NA          1
+ [7,]       NA          1
+ [8,]       NA          1
+ [9,]       NA          1
+[10,]       NA          1
+[11,]       NA          1
+[12,]       NA          1
+[13,]       NA          1
+[14,]       NA          1
+[15,]       NA          1
+[16,]       NA          1
+[17,]       NA          1
+[18,]       NA          1
+[19,]       NA          1
+[20,]       NA          1
+[21,]       NA          1
+[22,]       NA          1
+[23,]       NA          1
+[24,]       NA          1
+[25,]       NA          1
+[26,]       NA          1
+[27,]       NA          1
+[28,]       NA          1
+[29,]       NA          1
+[30,]       NA          1
+[31,]       NA          1
+[32,]       NA          1
+[33,]       NA          1
+[34,]       NA          1
+[35,]       NA          1
+[36,]       NA          1
+[37,]       NA          1
+[38,]       NA          1
+[39,]       NA          1
+[40,]       NA          1
+[41,]       NA          1
+[42,]       NA          1
+[43,]       NA          1
+[44,]       NA          1
+[45,]       NA          1
+[46,]       NA          1
+[47,]       NA          1
+[48,]       NA          1
+[49,]       NA          1
+[50,]       NA          1
+```
+
