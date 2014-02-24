@@ -60,6 +60,7 @@ stchange.df <- function(data, mu = 0, s = sqrt(1), t = 20,
 hpp <- function(Z, Xcov, a = 2, b = 2, lam,
                 bet.pr = matrix(c(0.1, 0.4, 0.1, 0.5), nrow = 4, ncol = 1),
                 bet1.pr = matrix(c(0.2, 0.3), nrow = 2)){
+
   if (is.matrix(Z)) {
     if (nrow(Z) < 5) {
       stop('Z must have sufficient time points.')
@@ -77,6 +78,7 @@ hpp <- function(Z, Xcov, a = 2, b = 2, lam,
   
   PP <- numeric()
   # Loop through v
+
   for(p in 2:n){
     x1 <- cbind(rep(1, p - 1), Xcov[1:(p - 1)])
     x2 <- cbind(rep(1, n - (p - 1)), Xcov[p:n])
@@ -148,18 +150,21 @@ hpp <- function(Z, Xcov, a = 2, b = 2, lam,
   
   # Compute the new PP with v = n
   PP[p + 1] <- (det(Lambda)) ^ (- 1 / 2) * (2 / M1) ^ (a + 1) * gamma(a + 1) * (det(U1) ^ (1 / 2))
-  
+
+  # Obtain the complete cases of PP to remove NA
+  PP <- PP[complete.cases(PP)]
+
   # Compute the sum of the Posterior Probability (PP)
-  PP.sum <- sum(PP, na.rm = TRUE)
-  
+  PP.sum <- sum(PP)
+
   # Take the proportion
-  PP.prop <- PP/PP.sum
+  PP.prop <- PP/PP.sum  
   
   # Obtain the Highest Posterior Probability
-  max.PP <- max(PP.prop, na.rm = TRUE)
+  max.PP <- max(PP.prop)
   
   # Locate the Highest Posterior Probability
-  v <- subset(1:n, PP.prop == max(PP.prop, na.rm = TRUE))
+  v <- subset(1:n, PP.prop == max(PP.prop))
   
   # Return the output
   return(list('Posterior Probability' = PP.prop, 
@@ -294,10 +299,10 @@ hpp.runs <- function(dat, mu = 0, s = sqrt(1), t = 20, phi = 0.2, lam = 0.3,
     h.out <- h$'Location of v'
     
     # Compute the HPP - 5% of R runs
-    h.nvl <- t - (0.05 * R)
+    h.nvl <- h.out - (0.05 * R)
     
     # Compute the HPP + 5% of R runs
-    h.nvu <- t + (0.05 * R)
+    h.nvu <- h.out + (0.05 * R)
     
     # Obtain the HPP at v
     if(h.out == t){
@@ -305,7 +310,7 @@ hpp.runs <- function(dat, mu = 0, s = sqrt(1), t = 20, phi = 0.2, lam = 0.3,
     }
     
     # Obtain the HPP near v
-    if((h.out > h.nvl) && (h.out < h.nvu)){
+    if((t > h.nvl) && (t < h.nvu)){
       hpp.out[i, 2] <- 1
     }
   }
