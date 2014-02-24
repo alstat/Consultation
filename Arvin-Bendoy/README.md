@@ -33,26 +33,24 @@ stchange.df <- function(data, mu = 0, s = sqrt(1), t = 20,
   # define the entries of Z matrix, with y1 from 1 to t
   # and y2 from n - t to t
   y1 <- matrix(0, nrow = t)
-  y2 <- matrix(0, nrow = n - t)
+  y2 <- matrix(0, nrow = (n - t) + 1)
   
   # Compute the entries of y1 and y2
   for(i in 2:t){ 
     y1[i, ] <- bet0 + bet1 * data[i - 1] + error[i] - 
       lam * (error[i - 1] - y1[(i - 1), ])
   }
-  y2[1,] <- y1[t,]
-  for(i in 2:(n - t)){
-    y2[i, ] <- bet0 + bet2 * data[(t - 1) + (i - 1)] + error[t + i] - 
-      lam * (error[t + i - 1] - y2[(i - 1), ])
+  for(i in 2:((n - t) + 1)){
+    y2[i, ] <- bet0 + bet2 * data[(t - 1) + (i - 1) - 1] + error[(t - 1) + i - 1] - 
+      lam * (error[(t - 1) + (i - 1) - 1] - y2[(i - 1), ])
   }
   
   # Combine the two variables to form the Z matrix
-  Z <- rbind(y1, y2)
+  Z <- rbind(y1, as.matrix(y2[2:((n - t) + 1),]))
   
   # Return the simulated Z
   return('Structural Change Data' = Z)
 }
-
 ```
 ### Function for Computing the Highest Posterior Probability
 
@@ -310,83 +308,83 @@ hpp.runs <- function(dat, mu = 0, s = sqrt(1), t = 20, phi = 0.2, lam = 0.3,
     }
     
     # Obtain the HPP near v
-    if((t > h.nvl) && (t < h.nvu)){
+    if((t >= h.nvl) && (t <= h.nvu)){
       hpp.out[i, 2] <- 1
     }
   }
   
   # Return the output
   return(list('HPP at v' = sum(hpp.out[,1], na.rm = TRUE),
-              'HPP near v' = sum(hpp.out[,2], na.rm = TRUE),
-              'Percentage near v' = sum(hpp.out[,2], na.rm = TRUE)/R,
+              'HPP near v' = sum(hpp.out[,2], na.rm = TRUE) - sum(hpp.out[,1], na.rm = TRUE),
+              'Percentage near v' = (sum(hpp.out[,2], na.rm = TRUE) - sum(hpp.out[,1], na.rm = TRUE))/R,
               'HPP Runs' = hpp.out))
 }
 ```
 Let's give it a try,
 ```{coffee}
-hpp.runs(dat = airquality$Wind[1:20], lam = 0.3, t = 8, R = 50)
+hpp.runs(dat = airquality$Wind[1:50], phi=0.2, lam = 0.3, t = 20, R = 50, bet1 = 0.2)
 
 # OUTPUT
 $`HPP at v`
-[1] 0
+[1] 37
 
 $`HPP near v`
-[1] 50
+[1] 13
 
 $`Percentage near v`
-[1] 1
+[1] 0.26
 
 $`HPP Runs`
       HPP at v HPP near v
  [1,]       NA          1
- [2,]       NA          1
+ [2,]        1          1
  [3,]       NA          1
- [4,]       NA          1
- [5,]       NA          1
- [6,]       NA          1
- [7,]       NA          1
+ [4,]        1          1
+ [5,]        1          1
+ [6,]        1          1
+ [7,]        1          1
  [8,]       NA          1
- [9,]       NA          1
-[10,]       NA          1
-[11,]       NA          1
+ [9,]        1          1
+[10,]        1          1
+[11,]        1          1
 [12,]       NA          1
-[13,]       NA          1
-[14,]       NA          1
-[15,]       NA          1
+[13,]        1          1
+[14,]        1          1
+[15,]        1          1
 [16,]       NA          1
-[17,]       NA          1
-[18,]       NA          1
-[19,]       NA          1
-[20,]       NA          1
-[21,]       NA          1
+[17,]        1          1
+[18,]        1          1
+[19,]        1          1
+[20,]        1          1
+[21,]        1          1
 [22,]       NA          1
-[23,]       NA          1
+[23,]        1          1
 [24,]       NA          1
 [25,]       NA          1
 [26,]       NA          1
 [27,]       NA          1
-[28,]       NA          1
+[28,]        1          1
 [29,]       NA          1
-[30,]       NA          1
-[31,]       NA          1
-[32,]       NA          1
-[33,]       NA          1
-[34,]       NA          1
+[30,]        1          1
+[31,]        1          1
+[32,]        1          1
+[33,]        1          1
+[34,]        1          1
 [35,]       NA          1
-[36,]       NA          1
-[37,]       NA          1
-[38,]       NA          1
-[39,]       NA          1
+[36,]        1          1
+[37,]        1          1
+[38,]        1          1
+[39,]        1          1
 [40,]       NA          1
-[41,]       NA          1
-[42,]       NA          1
-[43,]       NA          1
-[44,]       NA          1
-[45,]       NA          1
-[46,]       NA          1
-[47,]       NA          1
-[48,]       NA          1
-[49,]       NA          1
-[50,]       NA          1
+[41,]        1          1
+[42,]        1          1
+[43,]        1          1
+[44,]        1          1
+[45,]        1          1
+[46,]        1          1
+[47,]        1          1
+[48,]        1          1
+[49,]        1          1
+[50,]        1          1
 ```
 
