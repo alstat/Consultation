@@ -6,6 +6,7 @@ Determining the Breakpoint
 ```{coffee}
 stchange.df <- function(data, mu = 0, s = sqrt(1), t = 20,
                         phi = 0.2, lam = 0.3, bet1 = 0.3, delta = 0.5){
+
   if (is.matrix(data)) {
     if (nrow(data) < 5) {
       stop('data must have sufficient time points.')
@@ -34,6 +35,12 @@ stchange.df <- function(data, mu = 0, s = sqrt(1), t = 20,
   # and y2 from n - t to t
   y1 <- matrix(0, nrow = t)
   y2 <- matrix(0, nrow = (n - t) + 1)
+  if (is.matrix(data)){
+    y1[1, ] <- data[1, ]
+  }
+  if (is.numeric(data)){
+    y1[1] <- data[1]
+  }
   
   # Compute the entries of y1 and y2
   for(i in 2:t){ 
