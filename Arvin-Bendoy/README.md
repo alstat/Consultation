@@ -394,4 +394,43 @@ $`HPP Runs`
 [49,]        1          1
 [50,]        1          1
 ```
+### HPP Loop on Beta Priors
 
+```{coffee}
+hpp.loop <- function(dat, mu = 0, s = sqrt(1), t = 5, 
+                     phi = 0.2, lam = 0.1, bet1 = 1, delta = 0.2, 
+                     a = 2, b = 2, R = 50, beta0_star = 0.18,
+                     beta1_star, beta2_star){
+  # Define out variable as list
+  out <- list()
+  
+  # Initilize j counter
+  j <- 1
+  
+  # Loop across entries of beta2_star
+  for(i in 1:length(beta2_star)){
+    
+    # Run hpp.runs on every loop
+    out[[i]] <- hpp.runs(
+      dat = dat, mu = mu, s = s, t = t, phi = phi, lam = lam, 
+      bet1 = bet1, delta = delta, a = a, b = b, R = R, 
+      bet.pr = matrix(c(beta0_star, beta1_star[j], beta0_star, beta2_star[i]), nrow = 4, ncol = 1), 
+      bet1.pr = matrix(c(beta0_star, beta1_star[j]), nrow = 2))
+    
+    # Redefine counter, j
+    j <- j + 1
+  }
+  
+  # Return the output
+  return(out)
+}
+```
+Try it,
+```{coffee}
+# Define the values of Beta_{1}^{*} and Beta_{2}^{*} priors
+beta1star <- c(1.0, 1.3, 1.5, 1.0, 1.3, 1.5, 1.0, 1.3, 1.5, 1.0, 1.3, 1.5, 1.0, 1.3, 1.5)
+beta2star <- c(1.2, 1.4, 1.6, 1.4, 1.6, 1.8, 1.6, 1.8, 2.0, 1.8, 2.0, 2.2, 2.0, 2.2, 2.4)
+
+# Run the function
+hpp.loop(dat = airquality$Wind[1:50], beta1_star = beta1star, beta2_star = beta2star)
+```
