@@ -98,8 +98,10 @@ error_growth <- function (n = 10, r = 100, min = -2, max = 2, alpha = 1.33,
     z_vec_list <- z_vec_list; z_errors_list <- z_errors_list
   }
   
-  return(list(z_list = z_vec_list, z_moments = z_vec_moments, z_errors = z_errors_list,
-         z_errors_moments = z_errors_moments))
+  return(list("z series from iteration" = z_vec_list, 
+              "Statistical inference of z series from iteration" = z_vec_moments, 
+              "errors of z series from iteration" = z_errors_list,
+              "Statistical inference of errors from iteration" = z_errors_moments))
 }
 ```
 Lets try to run it, using default values we have
@@ -108,350 +110,386 @@ error_growth()
 
 ## OUTPUT
 
-$z_list
-$z_list[[1]]
+$`z series from iteration`
+$`z series from iteration`[[1]]
   Unperturbed   Perturbed
-1 -2.00343286 -2.00343285
-2 -0.01942366 -0.01942366
-3 -0.34169581 -0.34169581
-4  0.00337743  0.00337743
-5  0.06203725  0.06203725
-6 -0.10998701 -0.10998701
+1 -3.41517722 -3.41517722
+2  0.98871744  0.98871744
+3 -0.03742858 -0.03742858
+4 -0.68730508 -0.68730508
+5 -0.32776829 -0.32776829
+6 -2.43527207 -2.43527207
 
-$z_list[[2]]
-  Unperturbed  Perturbed
-1   2.2357056  2.2357056
-2  -0.3740166 -0.3740166
-3  -1.9527229 -1.9527229
-4   0.0416762  0.0416762
-5   0.7657149  0.7657149
-6   0.3737030  0.3737030
-
-$z_list[[3]]
+$`z series from iteration`[[2]]
   Unperturbed   Perturbed
-1 -1.76305052 -1.76305052
-2 -0.37427365 -0.37427365
-3 -1.94960324 -1.94960323
-4  0.04433921  0.04433921
-5  0.81340971  0.81340971
-6  0.34612243  0.34612243
+1 -0.37141035 -0.37141035
+2 -1.98404204 -1.98404204
+3  0.01425327  0.01425327
+4  0.26453770  0.26453770
+5 -0.37396958 -0.37396958
+6 -1.95329074 -1.95329074
 
-$z_list[[4]]
+$`z series from iteration`[[3]]
   Unperturbed  Perturbed
-1   0.6917247  0.6917247
-2   0.3506416  0.3506416
-3   2.2139529  2.2139529
-4   0.1387560  0.1387560
-5   2.2642450  2.2642450
-6  -0.3740323 -0.3740323
+1 -0.17957411 -0.1795741
+2 -2.48030474 -2.4803047
+3 -0.01757601 -0.0175760
+4 -0.32597999 -0.3259800
+5  0.33354843  0.3335484
+6  2.37508668  2.3750867
 
-$z_list[[5]]
+$`z series from iteration`[[4]]
   Unperturbed  Perturbed
-1  -1.8856735 -1.8856735
-2  -0.2471518 -0.2471518
-3  -2.7442185 -2.7442185
-4   0.1422987  0.1422987
-5   2.3060435  2.3060435
-6  -0.3524924 -0.3524924
+1  -0.2513374 -0.2513374
+2  -2.7445611 -2.7445611
+3   0.1423095  0.1423095
+4   2.3061693  2.3061693
+5  -0.3523900 -0.3523900
+6  -2.1959992 -2.1959992
 
-$z_list[[6]]
+$`z series from iteration`[[5]]
+  Unperturbed  Perturbed
+1   0.1139636  0.1139636
+2   1.8016299  1.8016299
+3  -0.1349657 -0.1349657
+4  -2.2182838 -2.2182838
+5   0.3681035  0.3681035
+6   2.0230156  2.0230156
+
+$`z series from iteration`[[6]]
+   Unperturbed    Perturbed
+1  0.369919335  0.369919335
+2  2.001721571  2.001721572
+3  0.001540224  0.001540224
+4  0.028624038  0.028624039
+5 -0.067176582 -0.067176582
+6 -1.124380579 -1.124380578
+
+$`z series from iteration`[[7]]
+   Unperturbed    Perturbed
+1 -0.002610316 -0.002610315
+2 -0.045013392 -0.045013391
+3 -0.039737781 -0.039737780
+4 -0.730862609 -0.730862608
+5 -0.372823879 -0.372823878
+6 -1.967120073 -1.967120072
+
+$`z series from iteration`[[8]]
+  Unperturbed  Perturbed
+1  -0.2868242 -0.2868242
+2  -2.6715193 -2.6715193
+3   0.1254288  0.1254288
+4   2.0971323  2.0971323
+5  -0.2152244 -0.2152244
+6  -2.6793994 -2.6793994
+
+$`z series from iteration`[[9]]
   Unperturbed   Perturbed
-1  0.73878759  0.73878759
-2  0.37460393  0.37460393
-3  1.94559004  1.94559004
-4 -0.04773676 -0.04773676
-5 -0.87392758 -0.87392758
-6 -0.26732692 -0.26732692
+1 -0.37541227 -0.37541227
+2 -1.93573248 -1.93573248
+3  0.05594890  0.05594890
+4  1.01850545  1.01850545
+5 -0.04356637 -0.04356637
+6 -0.74196283 -0.74196283
 
-$z_list[[7]]
+$`z series from iteration`[[10]]
   Unperturbed   Perturbed
-1  1.74295306  1.74295306
-2  0.37516741  0.37516741
-3  1.93872378  1.93872378
-4 -0.05347815 -0.05347815
-5 -0.97527462 -0.97527462
-6 -0.05810660 -0.05810660
-
-$z_list[[8]]
-  Unperturbed  Perturbed
-1  -2.1902139 -2.1902139
-2   0.3493495  0.3493495
-3   2.2270498  2.2270498
-4   0.1409148  0.1409148
-5   2.2898501  2.2898501
-6  -0.3638251 -0.3638251
-
-$z_list[[9]]
-  Unperturbed   Perturbed
-1  0.72799633  0.72799633
-2  0.37195220  0.37195220
-3  1.97757365  1.97757365
-4 -0.01999805 -0.01999805
-5 -0.37067920 -0.37067920
-6  0.27265402  0.27265402
-
-$z_list[[10]]
-  Unperturbed  Perturbed
-1   2.3025365  2.3025365
-2  -0.3552607 -0.3552607
-3  -2.1659467 -2.1659467
-4  -0.1229923 -0.1229923
-5  -2.0649562 -2.0649562
-6   0.1490482  0.1490482
+1 -0.32518675 -0.32518675
+2 -2.44404437 -2.44404437
+3 -0.04903734 -0.04903734
+4 -0.89698982 -0.89698982
+5 -0.22644058 -0.22644058
+6 -2.71464191 -2.71464191
 
 
-$z_moments
-$z_moments[[1]]
-         Unperturbed   Perturbed
-Mean     -0.08381530 -0.08381530
-Std Dev   1.40684384  1.40684384
-Variance  1.97920960  1.97920960
-Kurtosis  2.70546754  2.70546754
-Skewness  0.00686246  0.00686246
-
-$z_moments[[2]]
+$`Statistical inference of z series from iteration`
+$`Statistical inference of z series from iteration`[[1]]
          Unperturbed  Perturbed
-Mean      -0.1760476 -0.1760476
-Std Dev    1.3082051  1.3082051
-Variance   1.7114005  1.7114005
-Kurtosis   2.8490025  2.8490025
-Skewness   0.1695342  0.1695342
+Mean      -0.1763497 -0.1763497
+Std Dev    1.3492610  1.3492610
+Variance   1.8205051  1.8205051
+Kurtosis   2.8070451  2.8070451
+Skewness  -0.1398503 -0.1398503
 
-$z_moments[[3]]
+$`Statistical inference of z series from iteration`[[2]]
          Unperturbed  Perturbed
-Mean      -0.1803717 -0.1803717
-Std Dev    1.4003994  1.4003994
-Variance   1.9611186  1.9611186
-Kurtosis   2.5662690  2.5662690
-Skewness   0.2145500  0.2145500
+Mean      0.01638025 0.01638025
+Std Dev   1.33770800 1.33770800
+Variance  1.78946270 1.78946270
+Kurtosis  2.81149042 2.81149042
+Skewness  0.06168373 0.06168373
 
-$z_moments[[4]]
-         Unperturbed  Perturbed
-Mean       0.1260126  0.1260126
-Std Dev    1.3980872  1.3980872
-Variance   1.9546477  1.9546477
-Kurtosis   2.5304314  2.5304314
-Skewness  -0.1441903 -0.1441903
-
-$z_moments[[5]]
+$`Statistical inference of z series from iteration`[[3]]
          Unperturbed   Perturbed
-Mean      0.06777242  0.06777242
-Std Dev   1.45753840  1.45753840
-Variance  2.12441818  2.12441818
-Kurtosis  2.38848930  2.38848930
-Skewness -0.10567715 -0.10567715
+Mean     -0.03840117 -0.03840117
+Std Dev   1.34183108  1.34183108
+Variance  1.80051065  1.80051065
+Kurtosis  2.54877066  2.54877066
+Skewness -0.05682836 -0.05682836
 
-$z_moments[[6]]
-         Unperturbed  Perturbed
-Mean      -0.2805551 -0.2805551
-Std Dev    1.3250029  1.3250029
-Variance   1.7556327  1.7556327
-Kurtosis   2.7009547  2.7009547
-Skewness   0.2944671  0.2944671
-
-$z_moments[[7]]
+$`Statistical inference of z series from iteration`[[4]]
          Unperturbed   Perturbed
-Mean     -0.02960195 -0.02960195
-Std Dev   1.37642574  1.37642574
-Variance  1.89454781  1.89454781
-Kurtosis  2.60695680  2.60695680
-Skewness -0.01464343 -0.01464343
+Mean     -0.26398874 -0.26398874
+Std Dev   1.34811285  1.34811285
+Variance  1.81740825  1.81740825
+Kurtosis  2.70324307  2.70324307
+Skewness  0.01467297  0.01467297
 
-$z_moments[[8]]
+$`Statistical inference of z series from iteration`[[5]]
          Unperturbed   Perturbed
-Mean      0.01489319  0.01489319
-Std Dev   1.39433977  1.39433977
-Variance  1.94418339  1.94418339
-Kurtosis  2.59947938  2.59947938
-Skewness -0.13879751 -0.13879751
+Mean     -0.05310944 -0.05310944
+Std Dev   1.35397535  1.35397535
+Variance  1.83324926  1.83324926
+Kurtosis  2.56821492  2.56821492
+Skewness -0.08533617 -0.08533617
 
-$z_moments[[9]]
-         Unperturbed  Perturbed
-Mean      0.10029736 0.10029736
-Std Dev   1.34876088 1.34876088
-Variance  1.81915590 1.81915590
-Kurtosis  2.63116432 2.63116432
-Skewness  0.00673927 0.00673927
-
-$z_moments[[10]]
+$`Statistical inference of z series from iteration`[[6]]
          Unperturbed   Perturbed
-Mean     -0.01451972 -0.01451972
-Std Dev   1.34366274  1.34366274
-Variance  1.80542955  1.80542955
-Kurtosis  2.65327230  2.65327230
-Skewness  0.08645403  0.08645403
+Mean     -0.15963401 -0.15963401
+Std Dev   1.29015379  1.29015379
+Variance  1.66449680  1.66449680
+Kurtosis  2.80113619  2.80113619
+Skewness -0.05926602 -0.05926602
+
+$`Statistical inference of z series from iteration`[[7]]
+         Unperturbed   Perturbed
+Mean     -0.10552435 -0.10552435
+Std Dev   1.21692676  1.21692676
+Variance  1.48091075  1.48091075
+Kurtosis  3.31274071  3.31274071
+Skewness  0.03480875  0.03480875
+
+$`Statistical inference of z series from iteration`[[8]]
+         Unperturbed   Perturbed
+Mean     -0.06228621 -0.06228621
+Std Dev   1.35975486  1.35975486
+Variance  1.84893329  1.84893329
+Kurtosis  2.75713484  2.75713484
+Skewness -0.13113248 -0.13113248
+
+$`Statistical inference of z series from iteration`[[9]]
+         Unperturbed   Perturbed
+Mean     0.141133580 0.141133581
+Std Dev  1.399466931 1.399466931
+Variance 1.958507692 1.958507692
+Kurtosis 2.451595198 2.451595198
+Skewness 0.004259234 0.004259234
+
+$`Statistical inference of z series from iteration`[[10]]
+         Unperturbed   Perturbed
+Mean      0.02717184  0.02717184
+Std Dev   1.36086399  1.36086399
+Variance  1.85195079  1.85195079
+Kurtosis  2.71124354  2.71124354
+Skewness -0.15811334 -0.15811334
 
 
-$z_errors
-$z_errors[[1]]
+$`errors of z series from iteration`
+$`errors of z series from iteration`[[1]]
        z_errors
-1 -5.335763e-10
-2 -5.335764e-10
-3 -5.335764e-10
-4 -5.335764e-10
-5 -5.335764e-10
-6 -5.335764e-10
+1 -9.258905e-10
+2 -9.258904e-10
+3 -9.258904e-10
+4 -9.258904e-10
+5 -9.258904e-10
+6 -9.258905e-10
 
-$z_errors[[2]]
+$`errors of z series from iteration`[[2]]
        z_errors
-1 -6.882681e-10
-2 -6.882682e-10
-3 -6.882681e-10
-4 -6.882682e-10
-5 -6.882682e-10
-6 -6.882682e-10
+1 -7.459174e-10
+2 -7.459173e-10
+3 -7.459174e-10
+4 -7.459174e-10
+5 -7.459174e-10
+6 -7.459173e-10
 
-$z_errors[[3]]
-      z_errors
-1 -6.96359e-10
-2 -6.96359e-10
-3 -6.96359e-10
-4 -6.96359e-10
-5 -6.96359e-10
-6 -6.96359e-10
-
-$z_errors[[4]]
+$`errors of z series from iteration`[[3]]
        z_errors
-1 -8.030511e-10
-2 -8.030511e-10
-3 -8.030510e-10
-4 -8.030511e-10
-5 -8.030510e-10
-6 -8.030511e-10
+1 -9.792326e-10
+2 -9.792327e-10
+3 -9.792326e-10
+4 -9.792326e-10
+5 -9.792326e-10
+6 -9.792327e-10
 
-$z_errors[[5]]
+$`errors of z series from iteration`[[4]]
        z_errors
-1 -8.986767e-10
-2 -8.986767e-10
-3 -8.986767e-10
-4 -8.986767e-10
-5 -8.986767e-10
-6 -8.986766e-10
+1 -1.350503e-11
+2 -1.350520e-11
+3 -1.350503e-11
+4 -1.350520e-11
+5 -1.350503e-11
+6 -1.350520e-11
 
-$z_errors[[6]]
+$`errors of z series from iteration`[[5]]
        z_errors
-1 -5.284952e-10
-2 -5.284952e-10
-3 -5.284952e-10
-4 -5.284952e-10
-5 -5.284952e-10
-6 -5.284952e-10
+1 -5.653198e-10
+2 -5.653198e-10
+3 -5.653198e-10
+4 -5.653198e-10
+5 -5.653198e-10
+6 -5.653198e-10
 
-$z_errors[[7]]
+$`errors of z series from iteration`[[6]]
        z_errors
-1 -2.420248e-10
-2 -2.420249e-10
-3 -2.420248e-10
-4 -2.420249e-10
-5 -2.420250e-10
-6 -2.420249e-10
+1 -6.353736e-10
+2 -6.353735e-10
+3 -6.353736e-10
+4 -6.353736e-10
+5 -6.353736e-10
+6 -6.353735e-10
 
-$z_errors[[8]]
+$`errors of z series from iteration`[[7]]
        z_errors
-1 -2.883476e-10
-2 -2.883476e-10
-3 -2.883476e-10
-4 -2.883475e-10
-5 -2.883476e-10
-6 -2.883476e-10
+1 -9.764009e-10
+2 -9.764009e-10
+3 -9.764009e-10
+4 -9.764008e-10
+5 -9.764008e-10
+6 -9.764010e-10
 
-$z_errors[[9]]
+$`errors of z series from iteration`[[8]]
        z_errors
-1 -4.109650e-10
-2 -4.109651e-10
-3 -4.109650e-10
-4 -4.109651e-10
-5 -4.109651e-10
-6 -4.109651e-10
+1 -4.043135e-10
+2 -4.043135e-10
+3 -4.043135e-10
+4 -4.043135e-10
+5 -4.043135e-10
+6 -4.043135e-10
 
-$z_errors[[10]]
+$`errors of z series from iteration`[[9]]
        z_errors
-1 -3.499725e-10
-2 -3.499725e-10
-3 -3.499725e-10
-4 -3.499725e-10
-5 -3.499725e-10
-6 -3.499725e-10
+1 -3.782752e-10
+2 -3.782752e-10
+3 -3.782752e-10
+4 -3.782752e-10
+5 -3.782752e-10
+6 -3.782752e-10
+
+$`errors of z series from iteration`[[10]]
+       z_errors
+1 -1.455423e-10
+2 -1.455422e-10
+3 -1.455423e-10
+4 -1.455424e-10
+5 -1.455423e-10
+6 -1.455422e-10
 
 
-$z_errors_moments
-$z_errors_moments[[1]]
+$`Statistical inference of errors from iteration`
+$`Statistical inference of errors from iteration`[[1]]
                 output
-Mean     -5.335764e-10
-Std Dev   6.913266e-17
-Variance  4.779324e-33
-Kurtosis  2.176964e+00
-Skewness  2.321293e-01
+Mean     -9.258904e-10
+Std Dev   4.819111e-17
+Variance  2.322383e-33
+Kurtosis  1.340104e+00
+Skewness -3.826014e-01
 
-$z_errors_moments[[2]]
+$`Statistical inference of errors from iteration`[[2]]
                 output
-Mean     -6.882682e-10
-Std Dev   4.947035e-17
-Variance  2.447316e-33
-Kurtosis  1.210200e+00
-Skewness  3.229036e-01
+Mean     -7.459174e-10
+Std Dev   7.477871e-17
+Variance  5.591855e-33
+Kurtosis  2.316277e+00
+Skewness -8.406419e-01
 
-$z_errors_moments[[3]]
+$`Statistical inference of errors from iteration`[[3]]
                 output
-Mean     -6.963590e-10
-Std Dev   5.169558e-18
-Variance  2.672433e-35
-Kurtosis  3.740651e+00
-Skewness -1.633647e+00
+Mean     -9.792326e-10
+Std Dev   5.477577e-17
+Variance  3.000385e-33
+Kurtosis  1.081989e+00
+Skewness -2.799286e-01
 
-$z_errors_moments[[4]]
+$`Statistical inference of errors from iteration`[[4]]
                 output
-Mean     -8.030510e-10
-Std Dev   5.329679e-17
-Variance  2.840547e-33
-Kurtosis  1.143607e+00
-Skewness  3.474917e-01
+Mean     -1.350507e-11
+Std Dev   8.381780e-17
+Variance  7.025423e-33
+Kurtosis  1.848953e+00
+Skewness -7.418875e-01
 
-$z_errors_moments[[5]]
+$`Statistical inference of errors from iteration`[[5]]
                 output
-Mean     -8.986767e-10
-Std Dev   2.229346e-17
-Variance  4.969984e-34
-Kurtosis  1.433784e+00
-Skewness  2.750495e-01
+Mean     -5.653198e-10
+Std Dev   2.126461e-17
+Variance  4.521835e-34
+Kurtosis  1.843398e+00
+Skewness -4.707716e-01
 
-$z_errors_moments[[6]]
+$`Statistical inference of errors from iteration`[[6]]
                 output
-Mean     -5.284952e-10
-Std Dev   9.086157e-17
-Variance  8.255825e-33
-Kurtosis  3.027597e+00
-Skewness  1.423878e+00
+Mean     -6.353736e-10
+Std Dev   4.689149e-17
+Variance  2.198812e-33
+Kurtosis  1.358127e+00
+Skewness  3.768862e-01
 
-$z_errors_moments[[7]]
+$`Statistical inference of errors from iteration`[[7]]
                 output
-Mean     -2.420249e-10
-Std Dev   7.794859e-17
-Variance  6.075982e-33
-Kurtosis  2.225239e+00
-Skewness -8.157583e-01
+Mean     -9.764008e-10
+Std Dev   6.416134e-17
+Variance  4.116677e-33
+Kurtosis  2.942341e+00
+Skewness  1.401559e-01
 
-$z_errors_moments[[8]]
+$`Statistical inference of errors from iteration`[[8]]
                 output
-Mean     -2.883476e-10
-Std Dev   1.254596e-17
-Variance  1.574010e-34
-Kurtosis  1.505620e+00
-Skewness  6.734441e-01
+Mean     -4.043135e-10
+Std Dev   2.503721e-17
+Variance  6.268619e-34
+Kurtosis  1.136152e+00
+Skewness  6.245280e-03
 
-$z_errors_moments[[9]]
+$`Statistical inference of errors from iteration`[[9]]
                 output
-Mean     -4.109651e-10
-Std Dev   2.591459e-17
-Variance  6.715659e-34
-Kurtosis  1.104623e+00
-Skewness  6.933973e-02
+Mean     -3.782752e-10
+Std Dev   1.027099e-17
+Variance  1.054933e-34
+Kurtosis  2.561983e+00
+Skewness -1.084713e+00
 
-$z_errors_moments[[10]]
+$`Statistical inference of errors from iteration`[[10]]
                 output
-Mean     -3.499725e-10
-Std Dev   1.051669e-17
-Variance  1.106008e-34
-Kurtosis  2.362867e+00
-Skewness  9.600309e-01
+Mean     -1.455423e-10
+Std Dev   3.479104e-17
+Variance  1.210416e-33
+Kurtosis  2.236902e+00
+Skewness -1.635231e-01
 ```
+So let us explore the output, the first list is the ``z series from iteration``, so for first iteration we have the following z series:
+```{coffee}
+  Unperturbed   Perturbed
+1 -3.41517722 -3.41517722
+2  0.98871744  0.98871744
+3 -0.03742858 -0.03742858
+4 -0.68730508 -0.68730508
+5 -0.32776829 -0.32776829
+6 -2.43527207 -2.43527207
+```
+Now, we only have 6 data points here, but actually there are 100 data points, since the defualt number of iterations `r = 100`. We only have 6 here since the default `output` parameter of the function is set to `"partial"`.
+
+So there seems to be something wrong with the z series because even in the first iteration we have the same z series for unperturbed and perturbed, even though we have set the error for perturbed, which is the `epsilon * yt`. And that is where the problem actually, knowing that `epsilon = 10 ^ (-9)`, then if we have `yt =  0.6097608`. Then the perturbed model would be `z + epsilon * yt`, wherein `epsilon * yt = 10^(-9) *  0.6097608 =  6.097608e-10`. So the difference between unperturbed and perturbed would be  `6.097608e-10`, that is so small that we forgot to notice it. That is why in the above output for unperturbed and perturbed model on the first iteration and other iterations the z series are seems to be the same, but there is acutally a very small difference of `10 ^ (-9) * yt`.
+
+Next we took the statistical inference for the z series, and that is the next list of the output, the ``Statistical inference of z series from iteration``. So the statistical inference of z series from the first iteration would be,
+```{coffee}
+         Unperturbed  Perturbed
+Mean      -0.1763497 -0.1763497
+Std Dev    1.3492610  1.3492610
+Variance   1.8205051  1.8205051
+Kurtosis   2.8070451  2.8070451
+Skewness  -0.1398503 -0.1398503
+```
+So what to expect? Since both z series for unperturbed and perturbed have very small difference, then it should be expected that their statistcal inference should be close as well.
+
+The ``errors of z series from iteration`` is just the difference of the between the unperturbed and perturbed z series. Now, since the error of the perturbed model is `epsilon * yt`, where `yt` is generated from the uniform distribution (0, 1). Then for n initial points, we have n errors for perturbed. Of course, for first initial points, we have a corressponding error for perturbed, this error would then be used for `r` iterations, so if `r = 100000`, then there would be 100000 iterations and the first error of the perturbed model, for the first initial points is used for the entire itration before proceeding to the next error on the next intial points. That is why, for the entire iteration we have the same set of errors. From the example, the errors of z series from the first iteration would be,
+```{coffee}
+1 -9.258905e-10
+2 -9.258904e-10
+3 -9.258904e-10
+4 -9.258904e-10
+5 -9.258904e-10
+6 -9.258905e-10
+```
+
+Also, this error is so obvious without numerically computing it. Since from the theory, the unperturbed model is `z`, and the perturbed model is `z + epsilon * yt`. Hence, the error is just `epsilon * yt`, since that is the difference between the unperturbed and perturbed model.
