@@ -1,4 +1,5 @@
-## Statistical Inference
+## Error Growth Algorithm
+Below is the function for computing the statistical inference of unperturbed, perturbed and the error. The parameter of the function, `x`, is the series/data points generated from the models.
 ```{coffee}
 stat_moments <- function(x) {
   if (!require(moments)) 
@@ -23,7 +24,18 @@ stat_moments <- function(x) {
   return(as.data.frame(output))
 }
 ```
-## Error Growth
+Another function below computes the error growth of the unperturbed and perturbed model. The parameter of the function which are the following:
+
+1.  `n` - the number of initial points generated, default is set to 10;
+2.  `r` - the number of iterations needed for simulating the z series;
+3.  `min` - the minimum parameter of the uniform distribution for generating the initial points;
+4.  `max` - the maximum parameter of the uniform distribution for generating the initial points;
+5.  `alpha` - the alpha parameter, set to 1.33;
+6.  `epsilon` - the level of magnitude, default to 10 ^ (-9);
+7.  `yt_min` - the minimum parameter of the uniform distribution for generating the errors `yt`;
+8.  `yt_max` - the maximum parameter of the uniform distribution for generating the errors `yt`;
+9.  `output` - if set to `"partial"`, then only first 10 of the iteration outputs are shown, especially for z series generated through `r` iterations. Else if set to `"full"`, then all output are returned.
+
 ```{coffee}
 error_growth <- function (n = 10, r = 100, min = -2, max = 2, alpha = 1.33, 
                           epsilon = 10 ^ (-9), yt_min = 0, yt_max = 1, 
