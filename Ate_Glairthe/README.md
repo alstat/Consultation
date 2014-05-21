@@ -103,7 +103,7 @@ error_growth <- function (n = 10, r = 100, min = -2, max = 2, alpha = 1.33,
 }
 ```
 Lets try to run it, using default values we have
-```{r}
+```{coffee}
 error_growth()
 
 ## OUTPUT
