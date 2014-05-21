@@ -24,14 +24,14 @@ stat_moments <- function(x) {
   return(as.data.frame(output))
 }
 ```
-Another function below computes the error growth of the unperturbed and perturbed model. The parameter of the function which are the following:
+Another function below computes the error growth of the unperturbed and perturbed model. The parameter of the function are the following:
 
 1.  `n` - the number of initial points generated, default is set to 10;
-2.  `r` - the number of iterations needed for simulating the z series;
+2.  `r` - the number of iterations needed for simulating the z series, default is set to 100;
 3.  `min` - the minimum parameter of the uniform distribution for generating the initial points;
 4.  `max` - the maximum parameter of the uniform distribution for generating the initial points;
 5.  `alpha` - the alpha parameter, set to 1.33;
-6.  `epsilon` - the level of magnitude, default to 10 ^ (-9);
+6.  `epsilon` - the error level of magnitude, default to 10 ^ (-9);
 7.  `yt_min` - the minimum parameter of the uniform distribution for generating the errors `yt`;
 8.  `yt_max` - the maximum parameter of the uniform distribution for generating the errors `yt`;
 9.  `output` - if set to `"partial"`, then only first 10 of the iteration outputs are shown, especially for z series generated through `r` iterations. Else if set to `"full"`, then all output are returned.
@@ -467,9 +467,9 @@ So let us explore the output, the first list is the ``z series from iteration``,
 5 -0.32776829 -0.32776829
 6 -2.43527207 -2.43527207
 ```
-Now, we only have 6 data points here, but actually there are 100 data points, since the defualt number of iterations `r = 100`. We only have 6 here since the default `output` parameter of the function is set to `"partial"`.
+Now, we only have 6 data points here, but actually there are 100 data points, since the default number of iterations `r = 100`. We only have 6 here since the default `output` parameter of the function is set to `"partial"`. If it was set to `"full"`, then all 100 iterations are returned, but for purpose of illustration and for saving some spaces, we only explore the first 6.
 
-So there seems to be something wrong with the z series because even in the first iteration we have the same z series for unperturbed and perturbed, even though we have set the error for perturbed, which is the `epsilon * yt`. And that is where the problem actually, knowing that `epsilon = 10 ^ (-9)`, then if we have `yt =  0.6097608`. Then the perturbed model would be `z + epsilon * yt`, wherein `epsilon * yt = 10^(-9) *  0.6097608 =  6.097608e-10`. So the difference between unperturbed and perturbed would be  `6.097608e-10`, that is so small that we forgot to notice it. That is why in the above output for unperturbed and perturbed model on the first iteration and other iterations the z series are seems to be the same, but there is acutally a very small difference of `10 ^ (-9) * yt`.
+So there seems to be something wrong with the z series because even in the first iteration we have the same z series for unperturbed and perturbed, that is the -3.41517722 and -3.41517722, respectively. Though we have set the error for perturbed, which is the `epsilon * yt`. But this is where the problem actually, knowing that `epsilon = 10 ^ (-9)`, then if we have `yt =  0.6097608`. Then the perturbed model would be `z + epsilon * yt`, wherein `epsilon * yt = 10^(-9) *  0.6097608 =  6.097608e-10`. So the difference between unperturbed and perturbed would be  `6.097608e-10`, that is so small that makes it hard to notice. That is why in the above output for unperturbed and perturbed model on the first iteration and other iterations the z series are seems to be the same, but there is acutally a very small difference of `10 ^ (-9) * yt`.
 
 Next we took the statistical inference for the z series, and that is the next list of the output, the ``Statistical inference of z series from iteration``. So the statistical inference of z series from the first iteration would be,
 ```{coffee}
@@ -480,9 +480,9 @@ Variance   1.8205051  1.8205051
 Kurtosis   2.8070451  2.8070451
 Skewness  -0.1398503 -0.1398503
 ```
-So what to expect? Since both z series for unperturbed and perturbed have very small difference, then it should be expected that their statistcal inference should be close as well.
+So what to expect? Since both z series for unperturbed and perturbed have very small difference, then it should be expected that their statistical inference should be so close as well.
 
-The ``errors of z series from iteration`` is just the difference of the between the unperturbed and perturbed z series. Now, since the error of the perturbed model is `epsilon * yt`, where `yt` is generated from the uniform distribution (0, 1). Then for n initial points, we have n errors for perturbed. Of course, for first initial points, we have a corressponding error for perturbed, this error would then be used for `r` iterations, so if `r = 100000`, then there would be 100000 iterations and the first error of the perturbed model, for the first initial points is used for the entire itration before proceeding to the next error on the next intial points. That is why, for the entire iteration we have the same set of errors. From the example, the errors of z series from the first iteration would be,
+The ``errors of z series from iteration`` is just the difference between the unperturbed and perturbed z series. Now, since the error of the perturbed model is `epsilon * yt`, where `yt` is generated from the uniform distribution (0, 1). Then for n initial points, we have n errors for perturbed. Of course, for first initial points, we have a corressponding error for perturbed, this error would then be used for `r` iterations, so if `r = 100000`, then there would be 100000 iterations and the first error of the perturbed model, for the first initial points, is used for the entire itration before proceeding to the next error on the next intial points. That is why, for the entire iteration we have the same set of errors. From the example, the errors of z series from the first iteration would be,
 ```{coffee}
 1 -9.258905e-10
 2 -9.258904e-10
